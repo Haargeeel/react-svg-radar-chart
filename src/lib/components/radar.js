@@ -93,17 +93,21 @@ const scale = (options, value) => (
   />
 );
 
-const caption = options => col => (
-  <text
-    key={`caption-of-${col.key}`}
-    x={polarToX(col.angle, (options.size / 2) * 0.95).toFixed(4)}
-    y={polarToY(col.angle, (options.size / 2) * 0.95).toFixed(4)}
-    dy={(options.captionProps(col).fontSize || 10) / 2}
-    {...options.captionProps(col)}
-  >
-    {col.caption}
-  </text>
-);
+const caption = options => col => {
+  const clickFunc = options.captionClick || function (){}
+  return (
+    <text
+      key={`caption-of-${col.key}`}
+      x={polarToX(col.angle, (options.size / 2) * 0.95).toFixed(4)}
+      y={polarToY(col.angle, (options.size / 2) * 0.95).toFixed(4)}
+      dy={(options.captionProps(col).fontSize || 10) / 2}
+      {...options.captionProps(col)}
+      onClick={() => clickFunc(col)}
+    >
+      {col.caption}
+    </text>
+  )
+}
 
 const render = (captions, chartData, options = {}) => {
   if ('object' !== typeof captions || Array.isArray(captions)) {
