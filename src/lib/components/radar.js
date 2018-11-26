@@ -95,6 +95,7 @@ const scale = (options, value) => (
 
 const caption = options => col => {
   const clickFunc = options.captionClick || function() {};
+  const selected = options.selectedCaption === col.key;
   return (
     <text
       key={`caption-of-${col.key}`}
@@ -103,6 +104,9 @@ const caption = options => col => {
       dy={(options.captionProps(col).fontSize || 10) / 2}
       {...options.captionProps(col)}
       onClick={() => clickFunc(col)}
+      className={
+        options.captionProps(col).className + `${selected ? ' selected' : ''}`
+      }
     >
       {col.caption}
     </text>
