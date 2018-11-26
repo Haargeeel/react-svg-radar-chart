@@ -144,6 +144,11 @@ class App extends Component {
           }
         ],
         options: {
+          selectedCaption: 'weight',
+          selectedClassName: 'selected',
+          captionClick: col => {
+            console.log(col);
+          },
           dots: true,
           dotProps: () => ({
             className: 'dot',
